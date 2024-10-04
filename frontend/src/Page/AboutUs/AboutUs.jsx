@@ -6,7 +6,7 @@ const AboutUs = () => {
     <main className="pt-28 p-8 text-center mt-12 md:px-16 lg:px-24 xl:px-32">
       <h1 className="text-3xl font-bold mb-8">About Us</h1>
       <img
-        src="../../../src/assets/cycle.jpg"
+        src="https://res.cloudinary.com/dh4adw5o7/image/upload/v1728069704/InstiMela/etggtzjaywpqsqmvwmu5.jpg"
         alt="Buy & Sell"
         className="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 h-auto rounded-lg mx-auto"
       />
@@ -15,18 +15,18 @@ const AboutUs = () => {
           <div className="flex-1 pr-0 md:pr-6 mb-6 md:mb-0">
             <h2 className="text-2xl font-semibold mb-4">Buy & Sell Portal</h2>
             <p className="text-gray-700 text-lg md:text-base leading-relaxed">
-              Items which are an integral part of life at IIT Madras, facilitating
-              quick and convenient commuting across our expansive campus.
-              Unfortunately, as students graduate each year, many items are
-              left abandoned across the campus.
+              Items which are an integral part of life at IIT Madras,
+              facilitating quick and convenient commuting across our expansive
+              campus. Unfortunately, as students graduate each year, many items
+              are left abandoned across the campus.
             </p>
             <p className="text-gray-700 leading-relaxed">
               This website aims to bridge the gap between sellers and buyers,
-              providing a platform for students to sell their used item and
-              for buyers to purchase second-hand products at reasonable prices. By
+              providing a platform for students to sell their used item and for
+              buyers to purchase second-hand products at reasonable prices. By
               connecting sellers and buyers, we hope to promote sustainability
-              and ensure that more items or products find new homes instead of being left
-              unused.
+              and ensure that more items or products find new homes instead of
+              being left unused.
             </p>
           </div>
         </section>
@@ -34,7 +34,7 @@ const AboutUs = () => {
       <div className="w-full bg-gray-100 p-2 rounded-lg shadow-md mb-8 md:mb-12 lg:mb-16 xl:mb-20">
         <section className="flex flex-col-reverse md:flex-col items-center mb-8">
           <img
-            src="../../../src/assets/instiWebops.jpeg"
+            src="https://res.cloudinary.com/dh4adw5o7/image/upload/v1728069702/InstiMela/lu2jjvh7t0nx643wxrbo.jpg"
             alt="Institute Web Operations Club"
             className="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 h-auto rounded-lg mx-auto"
           />
