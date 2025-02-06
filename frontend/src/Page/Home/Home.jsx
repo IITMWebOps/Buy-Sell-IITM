@@ -59,12 +59,12 @@ const Home = () => {
   return (
     <div className="home-container py-[10rem]">
       {/* Navbar */}
-      <nav className="fixed top-[4rem] left-0 w-full bg-gray-800 text-white z-10 flex justify-between items-center px-10 py-4">
+      <nav className="fixed top-[4rem] left-0 w-full bg-gray-800 text-white  z-10 flex justify-between items-center px-10 py-4">
         <div className="flex items-center gap-4">
-          <h1 className="text-lg font-semibold">Buy & Sell Portal</h1>
+          <h1 className="text-lg hover:text-amber-500 font-semibold">Buy & Sell Portal</h1>
         </div>
         <FaFilter
-          className="h-7 w-7 cursor-pointer"
+          className="h-7 w-7  hover:text-amber-500 cursor-pointer"
           onClick={() => {
             setActive(!active);
           }}
@@ -73,12 +73,12 @@ const Home = () => {
 
       {/* Filter */}
       {active && (
-        <div className="bg-gray-200 p-4">
+        <div className="bg-amber-100 ring-1 rounded-sm my-1 p-4">
           <div className="flex gap-4 text-sm items-center justify-between">
             <span className="font-bold">Category:</span>
             <select
               name="category"
-              className="rounded bg-gray-100 p-2"
+              className="rounded bg-white ring-1 p-2"
               onChange={handleFilterChange}
               value={filters.category}
             >
@@ -88,11 +88,11 @@ const Home = () => {
               <option value="Hybrid">Hybrid</option>
             </select>
           </div>
-          <div className="flex gap-4 text-sm items-center justify-between">
+          <div className="flex gap-4 text-sm my-1 items-center justify-between">
             <span className="font-bold">Price Range:</span>
             <select
               name="minPrice"
-              className="rounded bg-gray-100 p-2"
+              className="rounded bg-white ring-1 p-2"
               onChange={handleFilterChange}
               value={filters.minPrice}
             >
@@ -108,7 +108,7 @@ const Home = () => {
             <span>to</span>
             <select
               name="maxPrice"
-              className="rounded bg-gray-100 p-2"
+              className="rounded bg-white ring-1 p-2"
               onChange={handleFilterChange}
               value={filters.maxPrice}
             >
@@ -122,11 +122,11 @@ const Home = () => {
               {/* Add more price options as needed */}
             </select>
           </div>
-          <div className="flex gap-4 text-sm items-center justify-between">
+          <div className="flex gap-4 my-1 text-sm items-center justify-between">
             <span className="font-bold">Condition:</span>
             <select
               name="condition"
-              className="rounded bg-gray-100 p-2"
+              className="rounded bg-white ring-1 p-2"
               onChange={handleFilterChange}
               value={filters.condition}
             >
@@ -155,10 +155,10 @@ const Home = () => {
       )}
 
       {/* Sorting */}
-      <div className="flex justify-center items-center p-4">
+      <div className="flex justify-center border-2 rounded-md border-y-amber-500 items-center p-2">
         <span className="font-bold mr-2">Sort By:</span>
         <select
-          className="rounded bg-gray-100 p-2"
+          className="rounded bg-amber-100 p-2"
           onChange={handleSortChange}
           value={sort}
         >
@@ -174,7 +174,7 @@ const Home = () => {
         {bicycles.map((bicycle) => (
           <div
             key={bicycle._id}
-            className="border border-gray-400 p-2 rounded text-black w-72 flex flex-col gap-2 bg-white hover:border-black cursor-pointer"
+            className="relative border-amber-500 border-x-4 border-y-2 border-y-gray-500 p-2 rounded-xl text-black w-72 flex flex-col gap-2 bg-amber-100 hover:border-black cursor-pointer overflow-hidden transition-transform transform hover:scale-95 "
           >
             <Link
               to={{ pathname: `/bicycle/${bicycle._id}`, state: { bicycle } }}
@@ -182,7 +182,7 @@ const Home = () => {
               <img
                 src={bicycle.images[0]}
                 alt={bicycle.description}
-                className="w-full h-40 bg-blue-500 rounded object-cover"
+                className="w-full h-40 bg-blue-500 rounded object-cover overflow-hidden transition-transform transform hover:scale-105"
               />
             </Link>
             <div className="h-32">
@@ -207,8 +207,8 @@ const Home = () => {
         {Array.from({ length: totalPages }, (_, index) => (
           <button
             key={index}
-            className={`mx-2 px-4 py-2 border rounded ${
-              page === index + 1 ? "bg-gray-300" : "bg-white"
+            className={`mx-2 px-4 py-2 border font-serif   rounded-full hover:ring-1  ${
+              page === index + 1 ? "bg-amber-500" : "bg-white"
             }`}
             onClick={() => handlePageChange(index + 1)}
           >

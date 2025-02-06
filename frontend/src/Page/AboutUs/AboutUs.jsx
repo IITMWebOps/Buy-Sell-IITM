@@ -3,14 +3,14 @@ import Layout from "./../Layout/Layout";
 
 const AboutUs = () => {
   return (
-    <main className="pt-28 p-8 text-center mt-12 md:px-16 lg:px-24 xl:px-32">
+    <main className="pt-28 p-8 font-medium text-center mt-12 md:px-16 lg:px-24 xl:px-32">
       <h1 className="text-3xl font-bold mb-8">About Us</h1>
       <img
         src="https://res.cloudinary.com/dh4adw5o7/image/upload/v1728069704/InstiMela/etggtzjaywpqsqmvwmu5.jpg"
         alt="Buy & Sell"
         className="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 h-auto rounded-lg mx-auto"
       />
-      <div className="w-full bg-gray-100 p-8 rounded-lg shadow-md mb-8 md:mb-12 lg:mb-16 xl:mb-20">
+      <div className="w-full bg-amber-50 p-8 rounded-lg shadow-md mb-8 md:mb-12 lg:mb-16 xl:mb-20">
         <section className="flex flex-col md:flex-row items-center mb-8">
           <div className="flex-1 pr-0 md:pr-6 mb-6 md:mb-0">
             <h2 className="text-2xl font-semibold mb-4">Buy & Sell Portal</h2>
@@ -31,7 +31,7 @@ const AboutUs = () => {
           </div>
         </section>
       </div>
-      <div className="w-full bg-gray-100 p-2 rounded-lg shadow-md mb-8 md:mb-12 lg:mb-16 xl:mb-20">
+      <div className="w-full bg-amber-50 p-2 rounded-lg shadow-md mb-8 md:mb-12 lg:mb-16 xl:mb-20">
         <section className="flex flex-col-reverse md:flex-col items-center mb-8">
           <img
             src="https://res.cloudinary.com/dh4adw5o7/image/upload/v1728069702/InstiMela/lu2jjvh7t0nx643wxrbo.jpg"

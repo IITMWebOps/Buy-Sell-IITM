@@ -54,8 +54,8 @@ const SignUp = () => {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-white py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full bg-gray-50 rounded-lg shadow-lg overflow-hidden sm:max-w-xl">
+    <div className="min-h-screen flex items-center justify-center  py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-md w-full bg-amber-50 ring-1 rounded-lg shadow-lg overflow-hidden sm:max-w-xl">
         <div className="px-6 py-8">
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
             Create your account
@@ -76,7 +76,7 @@ const SignUp = () => {
                   placeholder="Enter your first name"
                   value={firstName}
                   onChange={(e) => setFirstName(e.target.value)}
-                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
                   required
                 />
               </div>
@@ -94,7 +94,7 @@ const SignUp = () => {
                   placeholder="Enter your last name"
                   value={lastName}
                   onChange={(e) => setLastName(e.target.value)}
-                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
                   required
                 />
               </div>
@@ -113,7 +113,7 @@ const SignUp = () => {
                 placeholder="Enter your email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
                 required
               />
             </div>
@@ -131,7 +131,7 @@ const SignUp = () => {
                 placeholder="Enter your mobile number"
                 value={mobile}
                 onChange={(e) => setMobile(e.target.value)}
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
                 required
               />
             </div>
@@ -149,7 +149,7 @@ const SignUp = () => {
                 placeholder="Enter your username"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
                 required
               />
             </div>
@@ -167,7 +167,7 @@ const SignUp = () => {
                 placeholder="Enter your password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
                 required
               />
             </div>
@@ -183,7 +183,7 @@ const SignUp = () => {
                 name="profileImage"
                 type="file"
                 onChange={handleFileChange}
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
                 required
               />
             </div>
@@ -191,7 +191,7 @@ const SignUp = () => {
             <div className="mt-6">
               <button
                 type="submit"
-                className="w-full bg-indigo-600 text-white py-2 px-4 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:text-sm"
+                className="w-full bg-amber-600 text-white py-2 px-4 border border-transparent rounded-md shadow-sm font-semibold hover:bg-amber-500 focus:outline-none focus:ring-1 focus:ring-offset-2 focus:ring-green-500 sm:text-sm"
               >
                 Sign up
               </button>
@@ -201,7 +201,7 @@ const SignUp = () => {
             Already have an account?{" "}
             <Link
               to="/login"
-              className="font-medium text-indigo-600 hover:text-indigo-500"
+              className="font-medium text-green-600 hover:text-green-500"
             >
               Login
             </Link>

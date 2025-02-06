@@ -2,22 +2,38 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <div className="w-full h-30 gap-4 p-5  bg-black text-white flex flex-col items-center justify-center">
-      <div className="flex gap-8">
-        <a href="/" className="text-gray-400 hover:text-white">
-          Home
-        </a>
-        <a href="/about" className="text-gray-400 hover:text-white">
-          About
-        </a>
-        <a href="/contact" className="text-gray-400 hover:text-white">
-          Contact
-        </a>
-        <a href="/faq" className="text-gray-400 hover:text-white">
-          FAQ
-        </a>
+    <div className="w-full p-6 font-medium flex flex-col items-center justify-center bg-gray-900 text-center text-gray-300">
+      {/* Navigation Links */}
+      <div className="flex flex-wrap justify-center gap-8 mb-6">
+        <a href="/" className="text-white hover:text-yellow-500">Home</a>
+        <a href="/about" className="text-white hover:text-yellow-500">About</a>
+        <a href="/contact" className="text-white hover:text-yellow-500">Contact</a>
+        <a href="/faq" className="text-white hover:text-yellow-500">FAQ</a>
       </div>
-      <h1 className="text-sm text-gray-600">Copyright. IITM WebOps Team</h1>
+      
+      {/* Newsletter Signup */}
+      <div className="w-full max-w-3xl items-center justify-center border-t border-gray-700 pt-6 px-4">
+        <p className="text-lg font-semibold text-white mb-2">Stay Updated</p>
+        <p className="text-gray-500 mb-4">
+          Sign up for our newsletter and never miss an update on latest products.
+        </p>
+        <div className="flex flex-col md:flex-row items-center gap-4">
+          <input
+            type="email"
+            placeholder="Enter your email"
+            className="py-2 px-4 w-full md:w-64 border-2 border-green-400 bg-gray-800 text-white rounded-md focus:outline-none"
+          />
+          <button className="py-2 px-6 bg-amber-500 text-white rounded-md hover:bg-amber-600 transition-colors duration-300">
+            Subscribe
+          </button>
+        </div>
+      </div>
+      
+      {/* Footer Bottom Section */}
+      <div className="w-full max-w-3xl border-t border-gray-700 pt-6 mt-6 text-sm">
+        <p className="text-gray-500">&copy; 2024 All Rights Reserved.</p>
+        <p className="text-2xl font-semibold mt-4 text-amber-500">Institute WebOps Team, IIT Madras</p>
+      </div>
     </div>
   );
 };

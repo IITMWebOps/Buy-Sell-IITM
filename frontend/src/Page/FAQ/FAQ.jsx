@@ -1,24 +1,24 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import firstone from "./../../assets/firstone.jpg";
+
 function WelcomeMessage() {
   return (
-    <div className="WelcomeMessage ">
+    <div className="WelcomeMessage">
       <div
-        className="header h-96 bg-cover bg-center flex flex-col items-center p-10 mx-6 my-6 rounded-2xl "
+        className="header h-96 bg-cover bg-center flex flex-col items-center p-6 md:p-10 mx-4 md:mx-6 my-16 md:my-16 object-cover  rounded-none  w-screen"
         style={{ backgroundImage: `url(${firstone})` }}
       >
-        <h1 className="header-title text-5xl font-bold mb-2 text-white">FAQ</h1>
-        <p className="header-desc text-lg text-center mt-2 text-white">
-          Frequently Ask Questions
+        <h1 className="header-title text-4xl md:text-5xl font-bold mb-2 mt-16 text-black">FAQ</h1>
+        <p className="header-desc text-base md:text-lg text-center mt-2 text-amber-500">
+          Frequently Asked Questions
         </p>
-        <div className="search w-3/4 h-12 bg-white mt-5 rounded-full flex justify-between p-1">
+        <div className="search w-full md:w-3/4 h-12 bg-white mt-5  rounded-full flex justify-between p-1">
           <input
-            className="w-4/5 h-full p-2 bg-transparent border-none text-base"
+            className="w-3/4 md:w-4/5 h-full p-2 bg-transparent border-none text-base outline-none"
             type="text"
-            placeholder="Search...."
+            placeholder="Search..."
           />
-          <button className="w-1/5 min-w-max h-full bg-black text-white rounded-full hover:bg-black">
+          <button className="w-1/4 md:w-1/5 min-w-max h-full bg-black text-white rounded-full hover:bg-gray-800">
             Search
           </button>
         </div>
@@ -29,110 +29,82 @@ function WelcomeMessage() {
 
 function Neck() {
   return (
-    <div className="faq w-full  flex justify-center items-center flex-col p-3">
-      <div className="faq-name flex-1/2 pt-24 flex flex-col w-1/2 justify-center ml-10">
-        <h1 className="faq-header text-5xl font-bold ml-12 mb-0">
-          Have
-          <br />
-          Questions?
-        </h1>
-        <img
-          className="faq-img w-full max-w-md h-auto mt-0"
-          src="secondone.png"
-          alt=""
-        />
+    <div className="faq flex flex-col items-center justify-center p-3 text-center">
+      <div className="faq-name w-full max-w-lg">
+        <h1 className="text-2xl md:text-4xl font-bold">Have Questions?</h1>
+        <img className="w-full h-auto mt-4" src="secondone.png" alt="FAQ" />
       </div>
     </div>
   );
 }
-
 const data = [
   {
     question: "What should I look for when buying a used product?",
-    answer:
-      'Check the overall condition of the bike, including the frame, tires, brakes, and gears. If possible, arrange to see the bike in person and take it for a test ride. Don"t hesitate to ask the seller about the bike"s history and any maintenance it has undergone.',
+    answer: "Check the overall condition of the product, including all its components. If possible, arrange to see the product in person and test it if applicable. Don't hesitate to ask the seller about the product's history and any maintenance it has undergone."
   },
   {
     question: "How do I contact the seller?",
-    answer:
-      "Each listing includes a contact form to reach the seller directly. Fill out the form with your inquiry, and the seller will respond to arrange a meeting or provide more information.",
+    answer: "Each listing includes a contact form to reach the seller directly. Fill out the form with your inquiry, and the seller will respond to arrange a meeting or provide more information."
   },
   {
     question: "How do I list my product for sale?",
-    answer:
-      'To list your product, log in to your account and go to the "Sell" section. Fill out the listing form with details about your bike, including photos, description, price, and contact information. Your listing will be reviewed and published within 24 hours.',
+    answer: "To list your product, log in to your account and go to the 'Sell' section. Fill out the listing form with details about your product, including photos, description, price, and contact information. Your listing will be reviewed and published within 24 hours."
   },
   {
-    question: " How should I price my product?",
-    answer:
-      " Consider the age, condition, and original price of the bike. Research similar listings on the platform to gauge a competitive price. Be honest about the bike’s condition to ensure a fair deal for both parties.",
+    question: "How should I price my product?",
+    answer: "Consider the age, condition, and original price of the product. Research similar listings on the platform to gauge a competitive price. Be honest about the product's condition to ensure a fair deal for both parties."
   },
   {
     question: "How do I edit or remove my listing?",
-    answer:
-      " You can manage your listings through your account dashboard. From there, you can edit the details or remove the listing if the bike is sold or you change your mind.",
+    answer: "You can manage your listings through your account dashboard. From there, you can edit the details or remove the listing if the product is sold or you change your mind."
   },
   {
     question: "How do I ensure a safe transaction?",
-    answer:
-      " Always meet in a public place, preferably on campus, to exchange the product and payment. Avoid sharing personal information beyond what’s necessary for the transaction. Consider bringing a friend along for added safety.",
+    answer: "Always meet in a public place, preferably on campus, to exchange the product and payment. Avoid sharing personal information beyond what's necessary for the transaction. Consider bringing a friend along for added safety."
   },
   {
     question: "What payment methods are recommended?",
-    answer:
-      "Cash is often the simplest method for in-person transactions. If both parties agree, you can also use digital payment platforms like gpay,paytm,phonepay…",
+    answer: "Cash is often the simplest method for in-person transactions. If both parties agree, you can also use digital payment platforms like GPay, Paytm, PhonePe, etc."
   },
   {
     question: "Who can use this platform?",
-    answer:
-      "This platform is exclusively for current students, faculty, and staff of the college. You must have a valid college ID to create an account and participate in the exchange.",
+    answer: "This platform is exclusively for current students, faculty, and staff of the institute. You must have a valid institute ID to create an account and participate in the exchange."
   },
   {
-    question: " How do I sign up?",
-    answer:
-      'You can sign up using your college email address. Simply click on the "Sign Up" button on the homepage, enter your details, and verify your email to get started.',
+    question: "How do I sign up?",
+    answer: "You can sign up using your institute email address. Simply click on the 'Sign Up' button on the homepage, enter your details, and verify your email to get started."
   },
   {
     question: "How do I find a product to buy?",
-    answer:
-      'Browse the listings by visiting the "Buy Product" section. You can filter the results by price, type, condition, and location to find the perfect bike for your needs',
-  },
+    answer: "Browse the listings by visiting the 'Buy Product' section. You can filter the results by price, type, condition, and location to find the perfect product for your needs."
+  }
 ];
+
 
 const FAQ = () => {
   const [selected, setSelected] = useState(null);
-  const toggle = (i) => {
-    if (selected == i) {
-      return setSelected(null);
-    }
-    setSelected(i);
+
+  const toggle = (index) => {
+    setSelected(selected === index ? null : index);
   };
 
   return (
-    <div className="abc flex flex-col">
-      <div className="left">
-        <WelcomeMessage />
-      </div>
-      <div className="footer flex flex-row">
-        <div className="Leftbottom w-1/2">
-          <Neck />
-        </div>
-        <div className="accordian  w-1/2  p-3 border-l-2 border-slate-600 mt-3">
-          {data.map((item, i) => (
-            <div className="main w-f mb-2 mt-1.5 border-b border-black" key={i}>
+    <div className="flex flex-col items-center font-medium w-full p-4 md:p-6">
+      <WelcomeMessage />
+      <div className="flex flex-col md:flex-row items-center justify-center w-full max-w-6xl gap-6 md:gap-8 mt-6">
+        <Neck />
+        <div className="accordion w-full md:w-1/2 p-4 border-l-2 border-gray-300">
+          {data.map((item, index) => (
+            <div key={index} className="mb-3 border-b border-gray-400 pb-2">
               <div
-                className="title h-10 font-serif text-black flex justify-between items-center cursor-pointer"
-                onClick={() => toggle(i)}
+                className="flex justify-between items-center cursor-pointer text-lg font-semibold"
+                onClick={() => toggle(index)}
               >
-                <h2 className="font-semibold text-xl">{item.question}</h2>
-                <span>{selected == i ? "<" : ">"}</span>
+                <h2 className="text-base md:text-lg">{item.question}</h2>
+                <span className="text-xl">{selected === index ? "-" : "+"}</span>
               </div>
               <div
-                className={
-                  selected == i
-                    ? "content text-gray-500 font-serif font-bold transition-max-height duration-500 ease-in-out"
-                    : "content max-h-0 overflow-hidden transition-max-height duration-500 ease-in-out"
-                }
+                className={`text-gray-600 mt-2 transition-all duration-300 ${selected === index ? "block" : "hidden"}`}
               >
                 {item.answer}
               </div>
