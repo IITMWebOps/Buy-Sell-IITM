@@ -33,7 +33,7 @@ const Login = () => {
     return <Navigate to="/" replace />;
   }
   return (
-    <div className="min-h-screen flex font-medium items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+    <div className="flex font-medium items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full bg-amber-50 ring-1 rounded-lg shadow-lg overflow-hidden sm:max-w-xl">
         <div className="px-6 py-8">
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
@@ -80,7 +80,7 @@ const Login = () => {
             <div className="mt-6">
               <button
                 type="submit"
-                className="w-full bg-amber-600 text-white py-2 px-4 border border-transparent rounded-md shadow-sm font-semibold hover:bg-amber-500 focus:outline-none focus:ring-1 focus:ring-offset-2 focus:ring-green-500 sm:text-sm"
+                className="w-full bg-blue-600 text-white py-2 px-4 border border-transparent rounded-md shadow-sm font-semibold hover:bg-blue-500 focus:outline-none focus:ring-1 focus:ring-offset-2 focus:ring-green-500 sm:text-sm"
               >
                 Sign in
               </button>
@@ -90,7 +90,7 @@ const Login = () => {
             Don't have an account?{" "}
             <Link
               to="/register"
-              className="font-medium text-amber-600 hover:text-amber-500"
+              className="font-medium text-blue-600 hover:text-blue-500"
             >
               Sign up
             </Link>

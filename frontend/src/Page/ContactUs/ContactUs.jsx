@@ -56,7 +56,7 @@ const ContactUs = () => {
             <textarea className="shadow-sm border border-gray-300 rounded w-full py-2 px-3 text-gray-700 focus:ring-1 focus:ring-green-400 focus:outline-none" id="message" rows="5" placeholder="Your message" value={formData.message} onChange={handleChange} required></textarea>
           </div>
           <div className="flex items-center justify-center">
-            <button className="bg-amber-600 hover:bg-amber-500 w-1/2 text-white font-bold py-2 px-4 rounded-lg ring-1 focus:outline-none focus:ring-2 focus:ring-green-400 transition-transform transform hover:scale-105" type="submit" disabled={isSubmitting}>
+            <button className="bg-blue-600 hover:bg-blue-500 w-1/2 text-white font-bold py-2 px-4 rounded-lg ring-1 focus:outline-none focus:ring-2 focus:ring-green-400 transition-transform transform hover:scale-105" type="submit" disabled={isSubmitting}>
               {isSubmitting ? "Submitting..." : "Submit"}
             </button>
           </div>
