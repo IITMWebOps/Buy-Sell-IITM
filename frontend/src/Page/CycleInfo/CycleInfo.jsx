@@ -1,3 +1,5 @@
+
+
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
@@ -32,15 +34,15 @@ const CycleInfo = () => {
   if (!bicycle) return <ErrorMessage message="Bicycle not found" />;
 
   return (
-    <div className="bg-blue-50 font-medium  pt-24 pb-12 px-4 sm:px-6 lg:px-8">
+    <div className="bg-blue-50 font-medium pt-8 pb-8 px-2  md:w-5/6 w-full min-h-screen">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="max-w-7xl mx-auto bg-white shadow-xl rounded-lg overflow-hidden border border-blue-200"
+        className="w-full mx-auto bg-white shadow-xl rounded-lg overflow-hidden border border-blue-200"
       >
-        <div className="md:flex">
-          <div className="md:w-1/2 p-6">
+        <div className="md:flex flex-wrap">
+          <div className="w-full md:w-1/2 p-4 md:p-6">
             <div
               className="relative overflow-hidden rounded-lg shadow-lg"
               style={{ paddingBottom: "100%" }}
@@ -82,12 +84,12 @@ const CycleInfo = () => {
               ))}
             </div>
           </div>
-          <div className="md:w-1/2 p-6 bg-blue-50">
+          <div className="w-full md:w-1/2 p-4 md:p-6 bg-blue-50">
             <motion.h1
               initial={{ y: -20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.2 }}
-              className="text-3xl font-bold text-gray-700 mb-4"
+              className="text-2xl md:text-3xl font-bold text-gray-700 mb-4 break-words"
             >
               {bicycle.title}
             </motion.h1>
@@ -95,12 +97,12 @@ const CycleInfo = () => {
               initial={{ y: -10, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.3 }}
-              className="flex justify-between items-center mb-6"
+              className="flex flex-wrap justify-between items-center mb-6"
             >
-              <span className="text-2xl font-semibold text-blue-500">
+              <span className="text-xl md:text-2xl font-semibold text-blue-500 mb-2 md:mb-0">
                 ₹{bicycle.price}
               </span>
-              <span className="text-lg text-gray-600">
+              <span className="text-base md:text-lg text-gray-600">
                 Condition:{" "}
                 <span className="font-semibold text-blue-600">
                   {bicycle.condition}
@@ -113,16 +115,16 @@ const CycleInfo = () => {
               transition={{ delay: 0.4 }}
               className="bg-white p-4 rounded-lg shadow-md mb-6 border border-blue-200"
             >
-              <h2 className="text-xl font-semibold text-gray-700 mb-3">
+              <h2 className="text-lg md:text-xl font-semibold text-gray-700 mb-3">
                 Contact Details
               </h2>
-              <p className="text-gray-600">
+              <p className="text-gray-600 break-words">
                 <span className="font-semibold">Name:</span> {bicycle.name}
               </p>
-              <p className="text-gray-600">
+              <p className="text-gray-600 break-words">
                 <span className="font-semibold">Email:</span> {bicycle.email}
               </p>
-              <p className="text-gray-600">
+              <p className="text-gray-600 break-words">
                 <span className="font-semibold">Phone:</span>{" "}
                 {bicycle.phoneNumber}
               </p>
@@ -132,10 +134,10 @@ const CycleInfo = () => {
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.5 }}
             >
-              <h2 className="text-xl font-semibold text-gray-700 mb-2">
+              <h2 className="text-lg md:text-xl font-semibold text-gray-700 mb-2">
                 Description
               </h2>
-              <p className="text-gray-600">{bicycle.description}</p>
+              <p className="text-gray-600 break-words">{bicycle.description}</p>
             </motion.div>
           </div>
         </div>
@@ -143,6 +145,7 @@ const CycleInfo = () => {
     </div>
   );
 };
+
 
 const LoadingSpinner = () => (
   <div className="flex justify-center items-center h-screen bg-blue-50">
