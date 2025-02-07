@@ -25,7 +25,7 @@ const CycleInfo = () => {
   if (!bicycle) return <div>Loading...</div>;
 
   return (
-    <div className="flex flex-col lg:mt-24 md:mt-48 font-serif justify-between p-5 bg-green-50 ring-1 ring-blue-500 m-5 shadow-inner shadow-black rounded-3xl lg:flex-row gap-16 lg:items-center">
+    <div className="flex flex-col mt-36 font-serif justify-between p-5 bg-green-50 ring-1 ring-blue-500 m-5 shadow-inner shadow-black rounded-3xl lg:flex-row gap-16 lg:items-center">
       <div className="flex flex-col gap-2 lg:w-2/5">
         <img
           src={activeImg}
