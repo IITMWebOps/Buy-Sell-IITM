@@ -15,6 +15,15 @@ const Home = () => {
     maxPrice: "",
     condition: "",
   });
+  const resetFilters = () => {
+    setFilters({
+      category: "",
+      minPrice: "",
+      maxPrice: "",
+      condition: "",
+    });
+  };
+  
   const [sort, setSort] = useState("dateAdded:desc");
   const [page, setPage] = useState(1);
   const [total, setTotal] = useState(0);
@@ -57,108 +66,12 @@ const Home = () => {
   const totalPages = Math.ceil(total / limit);
 
   return (
-    <div className="home-container py-[10rem]">
-      {/* Navbar */}
-      <nav className="fixed top-[4rem] left-0 w-full bg-gray-800 text-white  z-10 flex justify-between items-center px-10 py-4">
-        <div className="flex items-center gap-4">
-          <h1 className="text-lg hover:text-amber-500 font-semibold">Buy & Sell Portal</h1>
-        </div>
-        <FaFilter
-          className="h-7 w-7  hover:text-amber-500 cursor-pointer"
-          onClick={() => {
-            setActive(!active);
-          }}
-        />
-      </nav>
-
-      {/* Filter */}
-      {active && (
-        <div className="bg-amber-100 ring-1 rounded-sm my-1 p-4">
-          <div className="flex gap-4 text-sm items-center justify-between">
-            <span className="font-bold">Category:</span>
-            <select
-              name="category"
-              className="rounded bg-white ring-1 p-2"
-              onChange={handleFilterChange}
-              value={filters.category}
-            >
-              <option value="">All</option>
-              <option value="Mountain">Mountain</option>
-              <option value="Road">Road</option>
-              <option value="Hybrid">Hybrid</option>
-            </select>
-          </div>
-          <div className="flex gap-4 text-sm my-1 items-center justify-between">
-            <span className="font-bold">Price Range:</span>
-            <select
-              name="minPrice"
-              className="rounded bg-white ring-1 p-2"
-              onChange={handleFilterChange}
-              value={filters.minPrice}
-            >
-              <option value="">Min Price</option>
-              <option value="500">Rs. 500</option>
-              <option value="1000">Rs. 1000</option>
-              <option value="2000">Rs. 2000</option>
-              <option value="3000">Rs. 3000</option>
-              <option value="4000">Rs. 4000</option>
-              <option value="5000">Rs. 5000</option>
-              <option value="6000">Rs. 6000</option>
-            </select>
-            <span>to</span>
-            <select
-              name="maxPrice"
-              className="rounded bg-white ring-1 p-2"
-              onChange={handleFilterChange}
-              value={filters.maxPrice}
-            >
-              <option value="">Max Price</option>
-              <option value="1000">Rs. 1000</option>
-              <option value="2000">Rs. 2000</option>
-              <option value="3000">Rs. 3000</option>
-              <option value="4000">Rs. 4000</option>
-              <option value="5000">Rs. 5000</option>
-              <option value="6000">Rs. 6000</option>
-              {/* Add more price options as needed */}
-            </select>
-          </div>
-          <div className="flex gap-4 my-1 text-sm items-center justify-between">
-            <span className="font-bold">Condition:</span>
-            <select
-              name="condition"
-              className="rounded bg-white ring-1 p-2"
-              onChange={handleFilterChange}
-              value={filters.condition}
-            >
-              <option value="new">New</option>
-              <option value="like_new">Like New</option>
-              <option value="good">Good</option>
-              <option value="fair">Fair</option>
-              <option value="poor">Poor</option>
-            </select>
-          </div>
-          {/* <div className="flex gap-4 text-sm items-center justify-between">
-            <span className="font-bold">Location:</span>
-            <select
-              name="location"
-              className="rounded bg-gray-100 p-2"
-              onChange={handleFilterChange}
-              value={filters.location}
-            >
-              <option value="">All</option>
-              <option value="City A">City A</option>
-              <option value="City B">City B</option>
-              <option value="City C">City C</option>
-            </select>
-          </div> */}
-        </div>
-      )}
-
+    <div className="home-container py-[1rem]">
       {/* Sorting */}
-      <div className="flex justify-center border-2 rounded-md border-y-amber-500 items-center p-2">
-        <span className="font-bold mr-2">Sort By:</span>
+      <div className="flex justify-center rounded-md border border-blue-200 items-center p-2 bg-white shadow-sm">
+        <span className="font-bold mr-2 text-gray-700">Sort By:</span> 
         <select
-          className="rounded bg-amber-100 p-2"
+          className="rounded bg-blue-50 p-2 text-gray-700"
           onChange={handleSortChange}
           value={sort}
         >
@@ -167,14 +80,99 @@ const Home = () => {
           <option value="price:desc">Price (High to Low)</option>
           <option value="price:asc">Price (Low to High)</option>
         </select>
+        <FaFilter
+          className="h-7 w-7  mx-4 hover:text-amber-500 cursor-pointer"
+          onClick={() => {
+            setActive(!active);
+          }}
+        />
       </div>
+      {/* Filter */}
+{active && (
+  <div className="bg-blue-50 ring-1 ring-blue-200 rounded-md my-2 p-5 shadow-sm">
+    <div className="flex flex-col gap-4">
+      <div className="flex items-center justify-between">
+        <span className="font-bold text-gray-700">Category:</span>
+        <select
+          name="category"
+          className="rounded-md bg-white border border-blue-200 p-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          onChange={handleFilterChange}
+          value={filters.category}
+        >
+          <option value="">All</option>
+          <option value="Mountain">Mountain</option>
+          <option value="Road">Road</option>
+          <option value="Hybrid">Hybrid</option>
+        </select>
+      </div>
+      <div className="flex items-center justify-between">
+        <span className="font-bold text-gray-700">Price Range:</span>
+        <div className="flex items-center gap-2">
+          <select
+            name="minPrice"
+            className="rounded-md bg-white border border-blue-200 p-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            onChange={handleFilterChange}
+            value={filters.minPrice}
+          >
+            <option value="">Min Price</option>
+            <option value="500">Rs. 500</option>
+            <option value="1000">Rs. 1000</option>
+            <option value="2000">Rs. 2000</option>
+            <option value="3000">Rs. 3000</option>
+            <option value="4000">Rs. 4000</option>
+            <option value="5000">Rs. 5000</option>
+            <option value="6000">Rs. 6000</option>
+          </select>
+          <span className="text-gray-500">to</span>
+          <select
+            name="maxPrice"
+            className="rounded-md bg-white border border-blue-200 p-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            onChange={handleFilterChange}
+            value={filters.maxPrice}
+          >
+            <option value="">Max Price</option>
+            <option value="1000">Rs. 1000</option>
+            <option value="2000">Rs. 2000</option>
+            <option value="3000">Rs. 3000</option>
+            <option value="4000">Rs. 4000</option>
+            <option value="5000">Rs. 5000</option>
+            <option value="6000">Rs. 6000</option>
+          </select>
+        </div>
+      </div>
+      <div className="flex items-center justify-between">
+        <span className="font-bold text-gray-700">Condition:</span>
+        <select
+          name="condition"
+          className="rounded-md bg-white border border-blue-200 p-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          onChange={handleFilterChange}
+          value={filters.condition}
+        >
+          <option value="">All</option>
+          <option value="new">New</option>
+          <option value="like_new">Like New</option>
+          <option value="good">Good</option>
+          <option value="fair">Fair</option>
+          <option value="poor">Poor</option>
+        </select>
+      </div>
+      <button
+        onClick={resetFilters}
+        className="mt-4 bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+      >
+        Reset Filters
+      </button>
+    </div>
+  </div>
+)}
+
 
       {/* Bicycles */}
       <div className="flex flex-wrap gap-8 justify-center mt-4">
         {bicycles.map((bicycle) => (
           <div
             key={bicycle._id}
-            className="relative border-amber-500 border-x-4 border-y-2 border-y-gray-500 p-2 rounded-xl text-black w-72 flex flex-col gap-2 bg-amber-100 hover:border-black cursor-pointer overflow-hidden transition-transform transform hover:scale-95 "
+            className="relative border-blue-300 border-x-4 border-y-2 border-y-gray-300 p-2 rounded-xl text-gray-800 w-72 flex flex-col gap-2 bg-white hover:border-blue-500 cursor-pointer overflow-hidden transition-transform transform hover:scale-95 shadow-md"
           >
             <Link
               to={{ pathname: `/bicycle/${bicycle._id}`, state: { bicycle } }}
@@ -182,18 +180,18 @@ const Home = () => {
               <img
                 src={bicycle.images[0]}
                 alt={bicycle.description}
-                className="w-full h-40 bg-blue-500 rounded object-cover overflow-hidden transition-transform transform hover:scale-105"
+                className="w-full h-40 bg-gray-200 rounded object-cover overflow-hidden transition-transform transform hover:scale-105"
               />
             </Link>
             <div className="h-32">
-              <h1 className="text-lg font-serif text-slate-700">
-                {bicycle.title}{" "}
+              <h1 className="text-lg font-serif text-gray-700">
+                {bicycle.title}
               </h1>
               <div className="font-semibold font-serif flex justify-between items-center text-xl">
                 {`₹${bicycle.price}`}{" "}
-                <span className="text-sm  ">{`Condition: ${bicycle.condition}`}</span>{" "}
+                <span className="text-sm text-gray-500">{`Condition: ${bicycle.condition}`}</span>
               </div>
-              <div className="text-sm">
+              <div className="text-sm text-gray-600">
                 {bicycle.description.slice(0, 150) +
                   (bicycle.description.length > 150 ? "..." : "")}
               </div>
@@ -207,8 +205,8 @@ const Home = () => {
         {Array.from({ length: totalPages }, (_, index) => (
           <button
             key={index}
-            className={`mx-2 px-4 py-2 border font-serif   rounded-full hover:ring-1  ${
-              page === index + 1 ? "bg-amber-500" : "bg-white"
+            className={`mx-2 px-4 py-2 border font-serif rounded-full hover:ring-1 ${
+              page === index + 1 ? "bg-blue-500 text-white" : "bg-white text-gray-700"
             }`}
             onClick={() => handlePageChange(index + 1)}
           >

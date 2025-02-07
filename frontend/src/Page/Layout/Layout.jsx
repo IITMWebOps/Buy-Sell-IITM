@@ -6,7 +6,7 @@ function Layout({ children }) {
     const { state } = useAuth();
 
     return (
-        <div className='bg-cyan-50'>
+        <div className='bg-blue-50'>
             <Navbar isAuthenticated={state.isAuthenticated} /> 
             <div className="content flex items-center justify-center">
                 {children}

@@ -21,9 +21,9 @@ const Footer = () => {
           <input
             type="email"
             placeholder="Enter your email"
-            className="py-2 px-4 w-full md:w-64 border-2 border-green-400 bg-gray-800 text-white rounded-md focus:outline-none"
+            className="py-2 px-4 w-full md:w-64 border-2 border-gray-400 bg-gray-800 text-white rounded-md focus:outline-none"
           />
-          <button className="py-2 px-6 bg-amber-500 text-white rounded-md hover:bg-amber-600 transition-colors duration-300">
+          <button className="py-2 px-6 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors duration-300">
             Subscribe
           </button>
         </div>
@@ -32,7 +32,7 @@ const Footer = () => {
       {/* Footer Bottom Section */}
       <div className="w-full max-w-3xl border-t border-gray-700 pt-6 mt-6 text-sm">
         <p className="text-gray-500">&copy; 2024 All Rights Reserved.</p>
-        <p className="text-2xl font-semibold mt-4 text-amber-500">Institute WebOps Team, IIT Madras</p>
+        <p className="text-2xl font-semibold mt-4 text-white">Institute WebOps Team, IIT Madras</p>
       </div>
     </div>
   );
