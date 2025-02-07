@@ -75,7 +75,7 @@ const CycleInfo = () => {
                   src={image}
                   alt={`bicycle ${index + 1}`}
                   className={`w-20 h-20 rounded-md cursor-pointer object-cover ${
-                    activeImg === image ? "ring-2 ring-blue-500" : ""
+                    activeImg === image ? "border-2 border-gray-500" : ""
                   }`}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
