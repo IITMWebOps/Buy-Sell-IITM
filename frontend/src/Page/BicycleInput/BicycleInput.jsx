@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { backendUrl } from "../../config";
+import { motion, AnimatePresence } from "framer-motion";
+
 const BicycleForm = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -12,9 +14,13 @@ const BicycleForm = () => {
   const [condition, setCondition] = useState("");
   const [images, setImages] = useState([]);
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
+    setLoading(true);
+    setError(""); // Clear any previous errors
 
     const formData = new FormData();
     formData.append("name", name);
@@ -29,27 +35,30 @@ const BicycleForm = () => {
       formData.append("images", images[i]);
     }
 
-    axios
-      .post(`${backendUrl}/api/bicycles`, formData, {
-        headers: {
-          "Content-Type": "ultipart/form-data",
-        },
-      })
-      .then((response) => {
-        setSubmitted(true);
-        // Update state with response data, if needed
-        console.log("response data ->>");
-        console.log("this is the data : ", response.data);
-        console.log("<<-");
-      })
-      .catch((error) => {
-        console.error(error);
-        // Handle error properly, e.g., display error message to user
-      });
+    try {
+      const response = await axios.post(
+        `${backendUrl}/api/bicycles`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+
+      setSubmitted(true);
+      console.log("response data ->>");
+      console.log("this is the data : ", response.data);
+      console.log("<<-");
+    } catch (error) {
+      console.error(error);
+      setError("Failed to submit the form. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleReset = () => {
-    // Reset form fields
     setName("");
     setEmail("");
     setPhoneNumber("");
@@ -60,10 +69,42 @@ const BicycleForm = () => {
     setCondition("");
     setImages([]);
     setSubmitted(false);
+    setError(""); // Clear any previous errors
+  };
+
+  // Framer Motion variants for form container
+  const formVariants = {
+    hidden: { opacity: 0, x: -50 },
+    visible: { opacity: 1, x: 0, transition: { duration: 0.5 } },
+    exit: { opacity: 0, x: 50, transition: { duration: 0.3 } },
+  };
+
+  // Framer Motion variants for success message
+  const successVariants = {
+    hidden: { opacity: 0, scale: 0.8 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: { duration: 0.4, ease: "easeInOut" },
+    },
+    exit: { opacity: 0, scale: 0.8, transition: { duration: 0.3 } },
+  };
+
+  // Framer Motion variants for loading and error messages
+  const messageVariants = {
+    hidden: { opacity: 0, y: -20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.3 } },
+    exit: { opacity: 0, y: -20, transition: { duration: 0.2 } },
   };
 
   return (
-    <div className="container mx-auto py-12 flex flex-col md:flex-row items-start justify-center">
+    <motion.div
+      className="container mx-auto py-12 flex flex-col md:flex-row items-start justify-center"
+      variants={formVariants}
+      initial="hidden"
+      animate="visible"
+      exit="exit"
+    >
       {/* Left Column (Guidelines and Tips) */}
       <div className="w-full md:w-2/5 bg-white p-6 shadow-md rounded-md mb-6 md:mb-0 md:mr-6">
         <h2 className="text-xl font-bold mb-4 text-center text-gray-800">
@@ -98,207 +139,253 @@ const BicycleForm = () => {
 
       {/* Right Column (Bicycle Listing Form or Confirmation) */}
       <div className="w-full md:w-3/5 bg-white shadow-md rounded-md overflow-hidden">
-        {submitted ? (
-          // Confirmation Message
-          <div className="bg-blue-500 text-white text-center py-4" id="Bicycle">
-            <h1 className="text-2xl font-bold">Thank You!</h1>
-            <p className="text-gray-100 mb-4">
-              Your Item has been listed successfully.
-            </p>
-            <button
-              onClick={handleReset}
-              className="bg-gray-600 text-white py-2 px-4 rounded-md hover:bg-gray-800"
+        <AnimatePresence>
+          {loading && (
+            <motion.div
+              className="bg-yellow-500 text-white text-center py-2"
+              variants={messageVariants}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
             >
-              List Another Items
-            </button>
-          </div>
-        ) : (
-          // Bicycle Listing Form
-          <form onSubmit={handleSubmit} id="bicycle-form" className="px-6 py-8">
-            <div className="mb-4">
-              <label
-                htmlFor="name"
-                className="block text-gray-700 font-bold mb-2"
-              >
-                Name
-              </label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                required
-                placeholder="Enter your name"
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-gray-500"
-              />
-            </div>
-            <div className="mb-4">
-              <label
-                htmlFor="email"
-                className="block text-gray-700 font-bold mb-2"
-              >
-                Email
-              </label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-                placeholder="Enter your email"
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-gray-500"
-              />
-            </div>
-            <div className="mb-4">
-              <label
-                htmlFor="number"
-                className="block text-gray-700 font-bold mb-2"
-              >
-                Phone Number
-              </label>
-              <input
-                type="tel"
-                id="number"
-                name="number"
-                value={phoneNumber}
-                onChange={(e) => setPhoneNumber(e.target.value)}
-                required
-                placeholder="Enter your phone number"
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-gray-500"
-              />
-            </div>
-            <div className="mb-4">
-              <label
-                htmlFor="gender"
-                className="block text-gray-700 font-bold mb-2"
-              >
-                Gender
-              </label>
-              <select
-                id="gender"
-                name="gender"
-                value={gender}
-                onChange={(e) => setGender(e.target.value)}
-                required
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-gray-500"
-              >
-                <option value="" disabled>
-                  Select your gender
-                </option>
-                <option value="male">Male</option>
-                <option value="female">Female</option>
-                <option value="other">Other</option>
-              </select>
-            </div>
-            <div className="mb-4">
-              <label
-                htmlFor="title"
-                className="block text-gray-700 font-bold mb-2"
-              >
-                Title
-              </label>
-              <input
-                type="text"
-                id="title"
-                name="title"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-                required
-                placeholder="Enter title"
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-gray-500"
-              />
-            </div>
-            <div className="mb-4">
-              <label
-                htmlFor="description"
-                className="block text-gray-700 font-bold mb-2"
-              >
-                Description
-              </label>
-              <textarea
-                id="description"
-                name="description"
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-                rows={4}
-                required
-                placeholder="Enter description"
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-gray-500"
-              />
-            </div>
-            <div className="mb-4">
-              <label
-                htmlFor="price"
-                className="block text-gray-700 font-bold mb-2"
-              >
-                Price (₹)
-              </label>
-              <input
-                type="number"
-                id="price"
-                name="price"
-                value={price}
-                onChange={(e) => setPrice(e.target.value)}
-                required
-                placeholder="Enter price"
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-gray-500"
-              />
-            </div>
-            <div className="mb-4">
-              <label
-                htmlFor="condition"
-                className="block text-gray-700 font-bold mb-2"
-              >
-                Condition
-              </label>
-              <select
-                id="condition"
-                name="condition"
-                value={condition}
-                onChange={(e) => setCondition(e.target.value)}
-                required
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-gray-500"
-              >
-                <option value="" disabled>
-                  Select condition
-                </option>
-                <option value="new">New</option>
-                <option value="like_new">Like New</option>
-                <option value="good">Good</option>
-                <option value="fair">Fair</option>
-                <option value="poor">Poor</option>
-              </select>
-            </div>
-            <div className="mb-4">
-              <label
-                htmlFor="images"
-                className="block text-gray-700 font-bold mb-2"
-              >
-                Upload Images
-              </label>
-              <input
-                type="file"
-                id="images"
-                name="images[]"
-                accept="image/*"
-                onChange={(e) => setImages(e.target.files)}
-                multiple
-                required
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-gray-500"
-              />
-            </div>
-            <button
-              type="submit"
-              className="w-full bg-slate-800 text-white py-2 rounded-md hover:bg-slate-500"
+              Loading... Please wait.
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        <AnimatePresence>
+          {error && (
+            <motion.div
+              className="bg-red-500 text-white text-center py-2"
+              variants={messageVariants}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
             >
-              Submit
-            </button>
-          </form>
-        )}
+              {error}
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        <AnimatePresence initial={false}>
+          {submitted ? (
+            // Confirmation Message
+            <motion.div
+              className="bg-none text-gray-900 rounded-md border-2 text-center p-4"
+              id="Bicycle"
+              variants={successVariants}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+            >
+              <h1 className="text-2xl font-bold">Thank You!</h1>
+              <p className="text-gray-900 mb-4">
+                Your Item has been listed successfully.
+              </p>
+              <button
+                onClick={handleReset}
+                className="bg-gray-600 text-white py-2 px-4 rounded-md hover:bg-gray-800"
+              >
+                List Another Items
+              </button>
+            </motion.div>
+          ) : (
+            // Bicycle Listing Form
+            <motion.form
+              onSubmit={handleSubmit}
+              id="bicycle-form"
+              className="px-6 py-8"
+              variants={formVariants}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+            >
+              <div className="mb-4">
+                <label
+                  htmlFor="name"
+                  className="block text-gray-700 font-bold mb-2"
+                >
+                  Name
+                </label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  required
+                  placeholder="Enter your name"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-gray-500"
+                />
+              </div>
+              <div className="mb-4">
+                <label
+                  htmlFor="email"
+                  className="block text-gray-700 font-bold mb-2"
+                >
+                  Email
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                  placeholder="Enter your email"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-gray-500"
+                />
+              </div>
+              <div className="mb-4">
+                <label
+                  htmlFor="number"
+                  className="block text-gray-700 font-bold mb-2"
+                >
+                  Phone Number
+                </label>
+                <input
+                  type="tel"
+                  id="number"
+                  name="number"
+                  value={phoneNumber}
+                  onChange={(e) => setPhoneNumber(e.target.value)}
+                  required
+                  placeholder="Enter your phone number"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-gray-500"
+                />
+              </div>
+              <div className="mb-4">
+                <label
+                  htmlFor="gender"
+                  className="block text-gray-700 font-bold mb-2"
+                >
+                  Gender
+                </label>
+                <select
+                  id="gender"
+                  name="gender"
+                  value={gender}
+                  onChange={(e) => setGender(e.target.value)}
+                  required
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-gray-500"
+                >
+                  <option value="" disabled>
+                    Select your gender
+                  </option>
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+              <div className="mb-4">
+                <label
+                  htmlFor="title"
+                  className="block text-gray-700 font-bold mb-2"
+                >
+                  Title
+                </label>
+                <input
+                  type="text"
+                  id="title"
+                  name="title"
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
+                  required
+                  placeholder="Enter title"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-gray-500"
+                />
+              </div>
+              <div className="mb-4">
+                <label
+                  htmlFor="description"
+                  className="block text-gray-700 font-bold mb-2"
+                >
+                  Description
+                </label>
+                <textarea
+                  id="description"
+                  name="description"
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                  rows={4}
+                  required
+                  placeholder="Enter description"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-gray-500"
+                />
+              </div>
+              <div className="mb-4">
+                <label
+                  htmlFor="price"
+                  className="block text-gray-700 font-bold mb-2"
+                >
+                  Price (₹)
+                </label>
+                <input
+                  type="number"
+                  id="price"
+                  name="price"
+                  value={price}
+                  onChange={(e) => setPrice(e.target.value)}
+                  required
+                  placeholder="Enter price"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-gray-500"
+                />
+              </div>
+              <div className="mb-4">
+                <label
+                  htmlFor="condition"
+                  className="block text-gray-700 font-bold mb-2"
+                >
+                  Condition
+                </label>
+                <select
+                  id="condition"
+                  name="condition"
+                  value={condition}
+                  onChange={(e) => setCondition(e.target.value)}
+                  required
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-gray-500"
+                >
+                  <option value="" disabled>
+                    Select condition
+                  </option>
+                  <option value="new">New</option>
+                  <option value="like_new">Like New</option>
+                  <option value="good">Good</option>
+                  <option value="fair">Fair</option>
+                  <option value="poor">Poor</option>
+                </select>
+              </div>
+              <div className="mb-4">
+                <label
+                  htmlFor="images"
+                  className="block text-gray-700 font-bold mb-2"
+                >
+                  Upload Images
+                </label>
+                <input
+                  type="file"
+                  id="images"
+                  name="images[]"
+                  accept="image/*"
+                  onChange={(e) => setImages(e.target.files)}
+                  multiple
+                  required
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-gray-500"
+                />
+              </div>
+              <button
+                type="submit"
+                className="w-full bg-slate-800 text-white py-2 rounded-md hover:bg-slate-500"
+                disabled={loading}
+              >
+                {loading ? "Submitting..." : "Submit"}
+              </button>
+            </motion.form>
+          )}
+        </AnimatePresence>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
