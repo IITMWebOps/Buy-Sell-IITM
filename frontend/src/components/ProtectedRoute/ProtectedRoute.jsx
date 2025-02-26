@@ -1,6 +1,6 @@
-import React from 'react';
-import { Navigate } from 'react-router-dom';
-import { useAuth } from '../../context/AuthContext';
+import React from "react";
+import { Navigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
 
 const ProtectRouter = ({ element: Element, ...rest }) => {
   const { state } = useAuth();
@@ -13,4 +13,3 @@ const ProtectRouter = ({ element: Element, ...rest }) => {
 };
 
 export default ProtectRouter;
-  

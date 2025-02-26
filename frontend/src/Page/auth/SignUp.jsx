@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, Navigate } from "react-router-dom";
 import axios from "axios";
+import { motion } from "framer-motion";
 import { useAuth } from "../../context/AuthContext";
 import { backendUrl } from "../../config";
 const SignUp = () => {
@@ -54,10 +55,20 @@ const SignUp = () => {
   }
 
   return (
-    <div className="flex items-center justify-center  py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full bg-amber-50 ring-1 rounded-lg shadow-lg overflow-hidden sm:max-w-xl">
+    <motion.div
+      className="flex items-center justify-center  m-4"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+    >
+      <motion.div
+        className="max-w-md w-full bg-gray-800 ring-1 ring-gray-700 rounded-lg shadow-lg overflow-hidden sm:max-w-xl"
+        initial={{ y: -50, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.5 }}
+      >
         <div className="px-6 py-8">
-          <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
+          <h2 className="mt-4 text-center text-3xl font-extrabold text-white">
             Create your account
           </h2>
           <form className="mt-8 space-y-6" onSubmit={handleSignUp}>
@@ -65,7 +76,7 @@ const SignUp = () => {
               <div>
                 <label
                   htmlFor="firstName"
-                  className="block text-sm font-medium text-gray-700"
+                  className="block text-sm font-medium text-gray-300"
                 >
                   First Name
                 </label>
@@ -76,14 +87,14 @@ const SignUp = () => {
                   placeholder="Enter your first name"
                   value={firstName}
                   onChange={(e) => setFirstName(e.target.value)}
-                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
+                  className="mt-1 block w-full px-3 py-2 border border-gray-600 rounded-md shadow-sm bg-gray-700 text-white focus:outline-none focus:ring-blue-400 focus:border-blue-400 sm:text-sm"
                   required
                 />
               </div>
               <div>
                 <label
                   htmlFor="lastName"
-                  className="block text-sm font-medium text-gray-700"
+                  className="block text-sm font-medium text-gray-300"
                 >
                   Last Name
                 </label>
@@ -94,7 +105,7 @@ const SignUp = () => {
                   placeholder="Enter your last name"
                   value={lastName}
                   onChange={(e) => setLastName(e.target.value)}
-                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
+                  className="mt-1 block w-full px-3 py-2 border border-gray-600 rounded-md shadow-sm bg-gray-700 text-white focus:outline-none focus:ring-blue-400 focus:border-blue-400 sm:text-sm"
                   required
                 />
               </div>
@@ -102,7 +113,7 @@ const SignUp = () => {
             <div>
               <label
                 htmlFor="email"
-                className="block text-sm font-medium text-gray-700"
+                className="block text-sm font-medium text-gray-300"
               >
                 Email address
               </label>
@@ -113,14 +124,14 @@ const SignUp = () => {
                 placeholder="Enter your email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
+                className="mt-1 block w-full px-3 py-2 border border-gray-600 rounded-md shadow-sm bg-gray-700 text-white focus:outline-none focus:ring-blue-400 focus:border-blue-400 sm:text-sm"
                 required
               />
             </div>
             <div>
               <label
                 htmlFor="mobile"
-                className="block text-sm font-medium text-gray-700"
+                className="block text-sm font-medium text-gray-300"
               >
                 Mobile number
               </label>
@@ -131,14 +142,14 @@ const SignUp = () => {
                 placeholder="Enter your mobile number"
                 value={mobile}
                 onChange={(e) => setMobile(e.target.value)}
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
+                className="mt-1 block w-full px-3 py-2 border border-gray-600 rounded-md shadow-sm bg-gray-700 text-white focus:outline-none focus:ring-blue-400 focus:border-blue-400 sm:text-sm"
                 required
               />
             </div>
             <div>
               <label
                 htmlFor="username"
-                className="block text-sm font-medium text-gray-700"
+                className="block text-sm font-medium text-gray-300"
               >
                 Username
               </label>
@@ -149,14 +160,14 @@ const SignUp = () => {
                 placeholder="Enter your username"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
+                className="mt-1 block w-full px-3 py-2 border border-gray-600 rounded-md shadow-sm bg-gray-700 text-white focus:outline-none focus:ring-blue-400 focus:border-blue-400 sm:text-sm"
                 required
               />
             </div>
             <div>
               <label
                 htmlFor="password"
-                className="block text-sm font-medium text-gray-700"
+                className="block text-sm font-medium text-gray-300"
               >
                 Password
               </label>
@@ -167,14 +178,14 @@ const SignUp = () => {
                 placeholder="Enter your password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
+                className="mt-1 block w-full px-3 py-2 border border-gray-600 rounded-md shadow-sm bg-gray-700 text-white focus:outline-none focus:ring-blue-400 focus:border-blue-400 sm:text-sm"
                 required
               />
             </div>
             <div>
               <label
                 htmlFor="profileImage"
-                className="block text-sm font-medium text-gray-700"
+                className="block text-sm font-medium text-gray-300"
               >
                 Profile Image
               </label>
@@ -183,7 +194,7 @@ const SignUp = () => {
                 name="profileImage"
                 type="file"
                 onChange={handleFileChange}
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
+                className="mt-1 block w-full px-3 py-2 border border-gray-600 rounded-md shadow-sm bg-gray-700 text-white focus:outline-none focus:ring-blue-400 focus:border-blue-400 sm:text-sm"
                 required
               />
             </div>
@@ -197,18 +208,18 @@ const SignUp = () => {
               </button>
             </div>
           </form>
-          <p className="mt-2 text-center text-sm">
+          <p className="mt-2 text-center text-sm text-gray-400">
             Already have an account?{" "}
             <Link
               to="/login"
-              className="font-medium text-blue-600 hover:text-blue-500"
+              className="font-medium text-blue-400 hover:text-blue-300"
             >
               Login
             </Link>
           </p>
         </div>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 };
 

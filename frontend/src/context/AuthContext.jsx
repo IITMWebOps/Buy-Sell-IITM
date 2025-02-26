@@ -1,4 +1,4 @@
-import React, { createContext, useReducer, useContext, useEffect } from 'react';
+import React, { createContext, useReducer, useContext, useEffect } from "react";
 
 // Initial state
 const initialState = {
@@ -10,14 +10,14 @@ const initialState = {
 // Reducer function
 const authReducer = (state, action) => {
   switch (action.type) {
-    case 'LOGIN':
+    case "LOGIN":
       return {
         ...state,
         user: action.payload.user,
         isAuthenticated: true,
         loading: false,
       };
-    case 'LOGOUT':
+    case "LOGOUT":
       return {
         ...state,
         user: null,
@@ -37,17 +37,17 @@ export const AuthProvider = ({ children }) => {
   const [state, dispatch] = useReducer(authReducer, initialState);
 
   useEffect(() => {
-    const storedUser = localStorage.getItem('user');
+    const storedUser = localStorage.getItem("user");
     if (storedUser) {
       try {
         const parsedUser = JSON.parse(storedUser);
-        dispatch({ type: 'LOGIN', payload: { user: parsedUser } });
+        dispatch({ type: "LOGIN", payload: { user: parsedUser } });
       } catch (error) {
-        console.error('Error parsing stored user:', error);
-        dispatch({ type: 'LOGOUT' });
+        console.error("Error parsing stored user:", error);
+        dispatch({ type: "LOGOUT" });
       }
     } else {
-      dispatch({ type: 'LOGOUT' });
+      dispatch({ type: "LOGOUT" });
     }
   }, []);
 

@@ -1,1 +1,1 @@
-export const backendUrl = `https://buy-sell-iitm.onrender.com`;
+export const backendUrl = `http://localhost:8080`;

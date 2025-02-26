@@ -12,6 +12,8 @@ import Signup from "../src/Page/auth/SignUp";
 import ProtectRouter from "./components/ProtectedRoute/ProtectedRoute";
 import Layout from "./Page/Layout/Layout";
 import BicycleForm from "./Page/BicycleInput/BicycleInput";
+import Profile from "./Page/Profile/Profile";
+import Manage from "./Page/Manage/Manage";
 
 const App = () => {
   return (
@@ -29,6 +31,14 @@ const App = () => {
           <Route
             path="/sell"
             element={<ProtectRouter element={BicycleForm} />}
+          />
+          <Route
+            path="/profile"
+            element={<ProtectRouter element={Profile} />}
+          />
+          <Route
+            path="/manage-products"
+            element={<ProtectRouter element={Manage} />}
           />
         </Routes>
       </Layout>

@@ -29,17 +29,19 @@ exports.createBicycle = asyncHandler(async (req, res, next) => {
     // Upload each image to Cloudinary
     for (const file of files) {
       const result = await new Promise((resolve, reject) => {
-        cloudinary.uploader.upload_stream(
-          {
-            folder: "bicycles",
-            resource_type: "image",
-            public_id: uuidv4(),
-          },
-          (error, result) => {
-            if (error) reject(error);
-            else resolve(result);
-          }
-        ).end(file.buffer);
+        cloudinary.uploader
+          .upload_stream(
+            {
+              folder: "bicycles",
+              resource_type: "image",
+              public_id: uuidv4(),
+            },
+            (error, result) => {
+              if (error) reject(error);
+              else resolve(result);
+            }
+          )
+          .end(file.buffer);
       });
       images.push(result.secure_url); // Store the Cloudinary URL
     }
@@ -60,68 +62,6 @@ exports.createBicycle = asyncHandler(async (req, res, next) => {
     res.status(201).send({ message: "Bicycle has been created successfully" });
   } catch (error) {
     res.status(400).send({ message: "Error creating bicycle", error });
-  }
-});
-
-exports.updateBicycle = asyncHandler(async (req, res, next) => {
-  const id = req.params.id;
-  const {
-    name,
-    email,
-    phoneNumber,
-    gender,
-    title,
-    description,
-    price,
-    condition,
-  } = req.body;
-  const files = req.files;
-  let images = [];
-
-  try {
-    if (files && files.length > 0) {
-      // Upload new images to Cloudinary
-      for (const file of files) {
-        const result = await new Promise((resolve, reject) => {
-          cloudinary.uploader.upload_stream(
-            {
-              folder: "bicycles",
-              resource_type: "image",
-              public_id: uuidv4(),
-            },
-            (error, result) => {
-              if (error) reject(error);
-              else resolve(result);
-            }
-          ).end(file.buffer);
-        });
-        images.push(result.secure_url);
-      }
-    }
-
-    const updatedBicycle = await Bicycle.findByIdAndUpdate(
-      id,
-      {
-        name,
-        email,
-        phoneNumber,
-        gender,
-        title,
-        description,
-        price,
-        condition,
-        images: images.length > 0 ? images : undefined, // Update images only if new ones are uploaded
-      },
-      { new: true }
-    ).exec();
-
-    if (!updatedBicycle) {
-      res.status(404).send({ message: "Bicycle not found" });
-    } else {
-      res.send(updatedBicycle);
-    }
-  } catch (error) {
-    res.status(400).send({ message: "Error updating bicycle", error });
   }
 });
 
@@ -163,33 +103,52 @@ exports.getBicycles = async (req, res) => {
   }
 };
 
-exports.getBicycle = asyncHandler(async (req, res, next) => {
-  const id = req.params.id;
-  const bicycle = await Bicycle.findById(id).exec();
+// Fetch Single Bicycle
+exports.getBicycle = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+  const bicycle = await Bicycle.findById(id);
+
   if (!bicycle) {
-    res.status(404).send({ message: "Bicycle not found" });
-  } else {
-    res.send(bicycle);
+    return res.status(404).json({ message: "Bicycle not found" });
   }
+
+  res.json(bicycle);
 });
 
-exports.deleteBicycle = asyncHandler(async (req, res, next) => {
-  const id = req.params.id;
-  await Bicycle.findByIdAndRemove(id).exec();
-  res.send({ message: "Bicycle deleted successfully" });
-});
+// Delete Bicycle (Now deletes images from Cloudinary)
+exports.deleteBicycle = asyncHandler(async (req, res) => {
+  const { id } = req.params;
 
-// For testing purposes:
-exports.addBicycles = async (req, res) => {
   try {
-    const bicycles = req.body;
-    if (!Array.isArray(bicycles)) {
-      return res.status(400).send("Request body should be an array of bicycles");
+    const bicycle = await Bicycle.findById(id);
+
+    if (!bicycle) {
+      return res.status(404).json({ message: "Bicycle not found" });
     }
 
-    const result = await Bicycle.insertMany(bicycles);
-    res.status(201).send(result);
-  } catch (err) {
-    res.status(500).send("Server Error");
+    // Delete each image from Cloudinary
+    if (bicycle.images && bicycle.images.length > 0) {
+      for (const imageUrl of bicycle.images) {
+        const publicId = imageUrl.split("/").pop().split(".")[0]; // Extract Cloudinary public ID
+        await cloudinary.uploader.destroy(`bicycles/${publicId}`);
+      }
+    }
+
+    await Bicycle.findByIdAndDelete(id);
+    res.json({ message: "Bicycle deleted successfully" });
+  } catch (error) {
+    res.status(500).json({ message: "Error deleting bicycle", error });
   }
-};
+});
+
+exports.getUserBicycles = asyncHandler(async (req, res) => {
+  const { userEmail } = req.query;
+
+  if (!userEmail) {
+    return res.status(400).json({ message: "User email is required" });
+  }
+
+  const bicycles = await Bicycle.find({ email: userEmail });
+
+  res.json({ bicycles });
+});

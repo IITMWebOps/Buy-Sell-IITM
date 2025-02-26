@@ -9,16 +9,11 @@ router.post(
   BicycleController.createBicycle
 );
 router.get("/bicycles", BicycleController.getBicycles);
-router.get("/bicycles/:id", BicycleController.getBicycle);
-router.put(
-  "/bicycles/:id",
-  upload.array("images", 12),
-  BicycleController.updateBicycle
-);
-router.delete("/bicycles/:id", BicycleController.deleteBicycle);
 
-// // For testing purposes
-// router.post("/add-multiple", BicycleController.addBicycles);
-// router.get("/images/:id", BicycleController.getImages);
+// ✅ Move this route above `/:id`
+router.get("/bicycles/user-bicycles", BicycleController.getUserBicycles);
+
+router.get("/bicycles/:id", BicycleController.getBicycle);
+router.delete("/bicycles/:id", BicycleController.deleteBicycle);
 
 module.exports = router;
