@@ -9,8 +9,19 @@ const Navbar = () => {
   const location = useLocation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
+  const [searchText, setSearchText] = useState("");
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    console.log("Searching for:", searchText);
+    if (searchText.trim()) {
+      navigate(`/?search=${searchText}`);
+    } else {
+      navigate("/"); // Redirect to homepage if search input is empty
+    }
+  };
 
   const handleLogout = () => {
     localStorage.removeItem("authToken");
@@ -50,16 +61,19 @@ const Navbar = () => {
     <nav className="bg-gray-900 font-medium shadow-md border-b border-gray-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          <div className="flex items-center">
-            <img
-              src="https://tse3.mm.bing.net/th?id=OIP.zN59XZkqlJjGp8P5-viNuwHaHa&pid=Api&P=0&h=180"
-              alt="Logo"
-              className="w-10 h-10 rounded-full"
-            />
-            <span className="ml-3 text-xl font-semibold text-white">
-              Buy and Sell
-            </span>
-          </div>
+          <Link to="/">
+            <div className="flex items-center">
+              <img
+                src="https://tse3.mm.bing.net/th?id=OIP.zN59XZkqlJjGp8P5-viNuwHaHa&pid=Api&P=0&h=180"
+                alt="Logo"
+                className="w-10 h-10 rounded-full"
+              />
+
+              <span className="ml-3 text-xl font-semibold text-white">
+                Buy and Sell
+              </span>
+            </div>
+          </Link>
 
           <div className="hidden md:block">
             <div className="ml-10 flex items-baseline space-x-4">
@@ -67,10 +81,13 @@ const Navbar = () => {
                 <input
                   type="search"
                   placeholder="Find items at your budget.."
-                  className="w-64 py-2 pl-4 pr-10 rounded-full bg-white text-gray-200 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-600"
+                  value={searchText}
+                  onChange={(e) => setSearchText(e.target.value)}
+                  className="w-64 py-2 pl-4 pr-10 rounded-full bg-white text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-600"
                 />
                 <button
                   type="submit"
+                  onClick={handleSearch}
                   className="absolute right-0 top-0 mt-2 mr-3 text-gray-500 hover:text-gray-400"
                 >
                   <IoIosSearch className="text-xl text-gray-950" />
@@ -145,10 +162,13 @@ const Navbar = () => {
               <input
                 type="search"
                 placeholder="Find items at your budget.."
-                className="w-full py-2 pl-4 pr-10 rounded-full bg-white text-gray-200 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-600"
+                className="w-full py-2 pl-4 pr-10 rounded-full bg-white text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-600"
+                value={searchText}
+                onChange={(e) => setSearchText(e.target.value)}
               />
               <button
                 type="submit"
+                onClick={handleSearch}
                 className="absolute right-0 top-0 mt-2 mr-3 text-gray-500 hover:text-gray-400"
               >
                 <IoIosSearch className="text-2xl font-bold text-gray-950" />

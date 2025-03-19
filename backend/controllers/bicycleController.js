@@ -72,13 +72,21 @@ exports.getBicycles = async (req, res) => {
     maxPrice,
     condition,
     location,
-    sortBy,
+    sortBy = "createdAt:desc",
     page = 1,
     limit = 10,
+    search,
   } = req.query;
   const filter = {};
 
-  if (category) filter.category = category;
+  if (search) {
+    filter.$or = [
+      { title: { $regex: search, $options: "i" } }, // Case-insensitive title search
+      { description: { $regex: search, $options: "i" } }, // Case-insensitive description search
+    ];
+  }
+
+  // if (category) filter.category = category;
   if (minPrice) filter.price = { ...filter.price, $gte: minPrice };
   if (maxPrice) filter.price = { ...filter.price, $lte: maxPrice };
   if (condition) filter.condition = condition;

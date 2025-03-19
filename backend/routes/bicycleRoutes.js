@@ -5,7 +5,7 @@ const upload = require("../middleware/upload");
 
 router.post(
   "/bicycles",
-  upload.array("images", 12),
+  upload.array("images", 6),
   BicycleController.createBicycle
 );
 router.get("/bicycles", BicycleController.getBicycles);
